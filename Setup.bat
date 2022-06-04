@@ -9,7 +9,7 @@ rename Console.bat.dis Console.bat
 rename emoji.bat.dis emoji.bat
 rename Restarter.bat.dis Restarter.bat
 
-echo Create desktop shortcut
+echo Createing desktop shortcut...
 :createshort
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 echo sLinkFile = "%HOMEDRIVE%%HOMEPATH%\Desktop\Console.lnk" >> CreateShortcut.vbs
@@ -21,6 +21,7 @@ del CreateShortcut.vbs
 
 echo Creating config...
 :createconfig
+del /f Console.cfg
 echo #Main Color >> Console.cfg
 echo 0A >> Console.cfg
 echo #Color Input Dialoge >> Console.cfg
@@ -51,7 +52,7 @@ Call :UnZipFile "%cd%\Tools" "%cd%\temp.zip"
 
 del /f temp.zip
 
-echo Installation finished
+echo Installation finished!
 pause
 exit /b
 
