@@ -1,0 +1,641 @@
+@echo off
+setlocal enabledelayedexpansion
+
+::
+::                         TODO
+::                Sudo befehl machen
+::                eigenes apt machen
+REM ║╔╗╦╬╠╣═╚╝
+cls
+color A
+title Virus Console
+echo Starting...
+chcp 65001
+set version=v1.1.5
+set old_dir=%cd%
+cd C:\Users\Alex\Desktop\VirusConsole\
+goto loadconfig
+
+:loadconfig
+echo Loading config...
+set /a c=0
+for /f "tokens=*" %%a in (Console.cfg) do (
+	set variable=%%a
+	set /a c=c+1
+	IF NOT "!variable:~0,1!"=="#" (
+	
+		IF "!c!"=="2" (color !variable!)
+		IF "!c!"=="2" (set color_main=!variable!)
+		
+		IF "!c!"=="4" (set color_input=!variable!)
+		IF "!c!"=="6" (set color_command_input=!variable!)
+		IF "!c!"=="8" (set color_command_text_input=!variable!)
+		IF "!c!"=="10" (set path_console_bat=!variable!)
+		IF "!c!"=="12" (set path_librarys=!variable!)
+		IF "!c!"=="14" (set path_tools=!variable!)
+		IF "!c!"=="16" (set path_restarter=!variable!)
+		IF "!c!"=="18" (set path_emoji=!variable!)
+		IF "!c!"=="20" (set path_spotify=!variable!)
+		IF "!c!"=="22" (set path_code=!variable!)
+		
+	)
+	set variable=
+)
+::                     :~19,59
+
+IF "%color_main%"=="" ( 
+echo Config not set! Creating new...
+
+echo #Main Color >> Console.cfg
+echo 0A >> Console.cfg
+echo #Color Input Dialoge >> Console.cfg
+echo 92 >> Console.cfg
+echo #Color Command Output >> Console.cfg
+echo 94 >> Console.cfg
+echo #Color Input Text >> Console.cfg
+echo 91 >> Console.cfg
+echo #Console.bat PATH >> Console.cfg
+echo C:\Users\Alex\Desktop\VirusConsole\Console.bat >> Console.cfg
+echo #Library PATH >> Console.cfg
+echo C:\Users\Alex\Desktop\VirusConsole\Librarys >> Console.cfg
+echo #Tools PATH >> Console.cfg
+echo C:\Users\Alex\Desktop\VirusConsole\Tools >> Console.cfg
+echo #Restarter PATH >> Console.cfg
+echo C:\Users\Alex\Desktop\VirusConsole\Restarter.bat >> Console.cfg
+echo #Emoji PATH >> Console.cfg
+echo C:\Users\Alex\Desktop\VirusConsole\emoji.bat >> Console.cfg
+echo #Code Folder PATH >> Console.cfg
+echo C:\Users\Alex\Desktop\VirusConsole\ >> Console.cfg
+
+)
+
+echo - Succesful
+goto checklibs
+
+:checklibs
+echo Checking library 1/2
+If exist "%path_librarys%\Python\python.exe" (
+    Echo - Succesful
+)
+echo Checking library 2/2
+If exist "%path_librarys%\Ruby\bin\ruby.exe" (
+    Echo - Succesful
+)
+goto inittools
+
+:inittools
+echo Initalizing tools 1/3
+If exist "%path_tools%\crunch\" (
+    Echo - Succesful
+)
+echo Initalizing tools 2/3
+If exist "%path_tools%\nmap\" (
+    Echo - Succesful
+)
+echo Initalizing tools 3/3
+If exist "%path_tools%\veil_evasion\Veil.py" (
+	If exist "%path_tools%\veil_evasion\.NotWorking" (
+		Echo - Finished with warnings:     Veil-Evasion not supportet for this version of VirusConsole!
+	)
+	If NOT exist "%path_tools%\veil_evasion\.NotWorking" (
+		Echo - Succesful
+	)
+)
+
+goto initapps
+
+:initapps
+echo Loading custom commands...
+
+ping 127.0.0.1 -n 1 > nul
+
+IF "%1"=="here" (cd %old_dir%)
+
+goto start
+
+:start
+echo [%color_command_input%m
+cls
+echo.
+REM ║╔╗╦╬╠╣═╚╝
+echo ╔══════════════════════════════════════════════════╗
+echo ║                                                  ║
+echo ║               Virus Console %version%               ║
+echo ║                                                  ║
+echo ╠══════════════════════════════════════════════════╣
+echo ║                                                  ║
+echo ║  Made for proffessional programmers and hackers  ║
+echo ║                                                  ║
+echo ╚══════════════════════════════════════════════════╝
+echo.
+goto input
+
+:clear
+cls
+echo.
+echo ╔══════════════════════════════════════════════════╗
+echo ║                                                  ║
+echo ║               Virus Console %version%               ║
+echo ║                                                  ║
+echo ╠══════════════════════════════════════════════════╣
+echo ║                                                  ║
+echo ║  Made for proffessional programmers and hackers  ║
+echo ║                                                  ║
+echo ╚══════════════════════════════════════════════════╝
+echo.
+
+:input
+REM ║╔╗╦╬╠╣═╚╝
+echo [%color_input%m╔══(%username%@%computername%)═[%CD%]
+set /p cmd="╚═ Command: [%color_command_text_input%m"
+goto run
+
+:run
+echo [%color_command_input%m
+
+if "%cmd%"=="clc" (goto clear)
+if "%cmd%"=="cl" (goto clear)
+if "%cmd%"=="clr" (goto clear)
+if "%cmd%"=="res" (goto clear)
+if "%cmd%"=="reset" (goto clear)
+if "%cmd%"=="c" (goto clear)
+if "%cmd%"=="cls" (goto clear)
+if "%cmd%"=="clear" (goto clear)
+if "%cmd%"=="ls" (goto dir)
+if "%cmd%"=="dir" (goto dir)
+if "%cmd%"=="d" (goto dir)
+if "%cmd%"=="listdir" (goto dir)
+if "%cmd%"=="ifconfig" (goto ipconfig)
+if "%cmd%"=="ip" (goto ipconfig)
+if "%cmd%"=="kill" (goto exit)
+if "%cmd%"=="close" (goto exit)
+if "%cmd%"=="exit" (goto exit)
+if "%cmd%"=="rs" (goto restart)
+if "%cmd%"=="rl" (goto restart)
+if "%cmd%"=="r" (goto restart)
+if "%cmd%"=="rel" (goto restart)
+if "%cmd%"=="restart" (goto restart)
+if "%cmd%"=="help" (goto help)
+if "%cmd%"=="?" (goto help)
+if "%cmd%"=="ps" (goto ps)
+if "%cmd%"=="powershell" (goto ps)
+if "%cmd%"=="shell" (goto shell)
+if "%cmd%"=="s" (goto shell)
+if "%cmd%"=="ve" (goto veilevasion)
+if "%cmd%"=="veilevasion" (goto veilevasion)
+if "%cmd%"=="veil_evasion" (goto veilevasion)
+if "%cmd%"=="vevasion" (goto veilevasion)
+if "%cmd%"=="veile" (goto veilevasion)
+if "%cmd%"=="emoji" (goto emoji)
+if "%cmd%"=="vemoji" (goto emoji)
+if "%cmd%"=="viriemoji" (goto emoji)
+if "%cmd%"=="hack" (goto hack)
+if "%cmd%"=="vim" (goto vim)
+if "%cmd%"=="vi" (goto vim)
+if "%cmd%"=="edit" (goto vim)
+if "%cmd%"=="dc" (dterm)
+if "%cmd%"=="dis" (dterm)
+if "%cmd%"=="discord" (dterm)
+if "%cmd%"=="calc" (goto calc)
+if "%cmd%"=="calculator" (goto calc)
+if "%cmd%"=="edit conf" (goto editconf)
+if "%cmd%"=="edit config" (goto editconf)
+if "%cmd%"=="edit cfg" (goto editconf)
+if "%cmd%"=="cfgedit" (goto editconf)
+if "%cmd%"=="cfgset" (goto editconf)
+if "%cmd%"=="sys" (goto sysinf)
+if "%cmd%"=="sysinf" (goto sysinf)
+if "%cmd%"=="system" (goto sysinf)
+if "%cmd%"=="systeminf" (goto sysinf)
+if "%cmd%"=="wa" (goto whatsapp)
+if "%cmd%"=="chat" (goto whatsapp)
+if "%cmd%"=="whatsapp" (goto whatsapp)
+if "%cmd%"=="apps" (goto apps)
+if "%cmd%"=="menu" (goto menu)
+if "%cmd%"=="test" (goto test)
+set /a c=0
+for /f "tokens=*" %%a in (%path_code%APPS.cfg) do (
+	set variable=%%a
+	set /a c=c+1
+	FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
+	
+		IF  "%%G"=="%cmd%" (
+		
+			%%H
+			echo.
+			goto input
+			
+		)
+	
+	)
+	
+	set variable=
+)
+
+goto advancedcommand
+
+:runcontinue
+
+%cmd%
+set cmd=
+echo.
+goto input
+
+:advancedcommand
+echo.
+for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
+	set arg1=%%b
+	set arg2=%%c
+	set arg3=%%d
+	set arg4=%%e
+	set arg5=%%f
+	set arg6=%%g
+	set arg7=%%h
+	set arg8=%%i
+	set arg9=%%j
+	set arg10=%%k
+	
+	if "%%a"=="cp" (goto copy)
+	if "%%a"=="mv" (goto copy)
+	if "%%a"=="mov" (goto copy)
+	if "%%a"=="rm" (goto rem)
+	if "%%a"=="rem" (goto rem)
+	if "%%a"=="remove" (goto rem)
+	if "%%a"=="mkdir" (echo Verzeichniss erfolgreich erstellt!)
+	if "%%a"=="nm" (goto nmap)
+	if "%%a"=="nmap" (goto nmap)
+	if "%%a"=="serverscan" (goto nmap)
+	if "%%a"=="sscan" (goto nmap)
+	if "%%a"=="crunch" (goto crunch)
+	if "%%a"=="cpwl" (goto crunch)
+	if "%%a"=="pwl" (goto crunch)
+	if "%%a"=="cpwlist" (goto crunch)
+	if "%%a"=="pwlist" (goto crunch)
+	if "%%a"=="createpasswordlist" (goto crunch)
+	if "%%a"=="passwordlist" (goto crunch)
+	if "%%a"=="config" (goto config)
+	if "%%a"=="cfg" (goto config)
+	if "%%a"=="cnfg" (goto config)
+	if "%%a"=="settings" (goto config)
+	if "%%a"=="setings" (goto config)
+	if "%%a"=="tskl" (goto TaskList)
+	if "%%a"=="task" (goto TaskList)
+	if "%%a"=="proclist" (goto TaskList)
+	if "%%a"=="tsl" (goto TaskList)
+	if "%%a"=="tl" (goto TaskList)
+	if "%%a"=="tasklist" (goto TaskList)
+	if "%%a"=="processlist" (goto TaskList)
+	if "%%a"=="nim" (goto vim)
+	if "%%a"=="vim" (goto vim)
+	if "%%a"=="vi" (goto vim)
+	if "%%a"=="edit" (goto vim)
+	if "%%a"=="hd" (goto hexdump)
+	if "%%a"=="hex" (goto hexdump)
+	if "%%a"=="hexd" (goto hexdump)
+	if "%%a"=="hexdump" (goto hexdump)
+	if "%%a"=="base64" (goto base64)
+	if "%%a"=="base" (goto base64)
+	if "%%a"=="playlist" (goto playlist)
+	if "%%a"=="vbs" (goto cscript)
+	if "%%a"=="sudo" (goto sudo)
+	if "%%a"=="7z" (goto sevenzip)
+	if "%%a"=="zip" (goto sevenzip)
+	if "%%a"=="7zip" (goto sevenzip)
+	if "%cmd%"=="sys" (goto sysinf)
+	if "%cmd%"=="sysinf" (goto sysinf)
+	if "%cmd%"=="system" (goto sysinf)
+	if "%cmd%"=="systeminf" (goto sysinf)
+	if "%cmd%"=="web" (goto web)
+	if "%cmd%"=="links" (goto web)
+	if "%%a"=="help" (
+		if "%%b"=="hd" (
+			set hgr=hexdump
+			goto helpspec
+		)
+		if "%%b"=="hex" (
+			set hgr=hexdump
+			goto helpspec
+		)
+		if "%%b"=="hexdump" (
+			set hgr=hexdump
+			goto helpspec
+		)
+		if "%%b"=="base64" (
+			set hgr=base64
+			goto helpspec
+		)
+	)
+	set /a c=0
+	for /f "tokens=*" %%a in (%path_code%APPS.cfg) do (
+		set variable=%%a
+		set /a c=c+1
+		FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
+		
+			IF  "%%G"=="%cmd%" (
+			
+				%%H
+				echo.
+				goto input
+				
+			)
+		
+		)
+		
+		set variable=
+	)
+	
+)
+goto runcontinue
+
+:menu
+set cmd=
+echo.
+REM ║╔╗╦╬╠╣═╚╝
+echo ╔═════════════════════════════════════╗
+echo ║       Simple Menu for Tools         ║
+echo ╠═════════════════════════════════════╣
+echo ║[v] = vim              [d] = discord ║
+echo ║[c] = calc             [w] = web     ║
+echo ║            [e] = exit               ║
+echo ╚═════════════════════════════════════╝
+
+SET /P M=
+IF "%M%"=="v" GOTO vim
+IF "%M%"=="c" GOTO calc
+IF "%M%"=="d" GOTO discord
+IF "%M%"=="w" GOTO web
+
+echo.
+goto input
+
+
+
+:shell
+start %path_console_bat%
+echo.
+goto input
+
+:test
+echo.
+set cmd=
+echo Testing console....
+ping 127.0.0.1 -n 2 > nul
+echo POSITIVE
+echo Test ended
+echo.
+goto input
+
+:apps
+echo.
+set cmd=
+set /a c=0
+for /f "tokens=*" %%a in (%path_code%APPS.cfg) do (
+	set variable=%%a
+	set /a c=c+1
+	FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
+	
+		echo APP/COMMAND:  %%G               %%H
+	
+	)
+	
+	set variable=
+)
+echo.
+goto input
+
+:config
+REM ║╔╗╦╬╠╣═╚╝
+if NOT /f %arg1%=="" (
+	echo ╔════════════════════════════════════════════════════════════════════════════════════
+	echo ║                  Current settings:                
+	echo ╠════════════════════════════════════════════════════════════════════════════════════
+	echo ║                   Color Settings:                 
+	echo ║                                                   
+	echo ║                   Main color: %color_main%                     
+	echo ║                  Input color: %color_input%                   
+	echo ║              Command Input color: %color_command_input%               
+	echo ╠════════════════════════════════════════════════════════════════════════════════════
+	echo ║                  Path Settings:        
+	echo ║                                                   
+	echo ║    Console path: %path_console_bat%
+	echo ║    Library path: %path_librarys%
+	echo ║      Tools path: %path_tools%
+	echo ║  Restarter path: %path_restarter%
+	echo ║      Emoji path: %path_emoji%
+	echo ╚════════════════════════════════════════════════════════════════════════════════════
+)
+
+echo.
+goto input
+
+:helpspec
+set cmd=
+IF "%hgr%"=="hexdump" (%path_tools%\hexdump\hexdump.exe -h)
+IF "%hgr%"=="base64" (echo Base64)
+echo.
+goto input
+
+:emoji
+start %path_emoji%
+goto input
+
+:hack
+echo %random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%
+goto hack
+
+:veilevasion
+set cmd=
+echo.
+	If exist "%path_tools%\veil_evasion\.NotWorking" (
+		Echo Veil-Evasion not supportet for this version of VirusConsole!
+	)
+	If NOT exist "%path_tools%\veil_evasion\.NotWorking" (
+		start /b %path_librarys%\Python\python.exe %path_tools%\veil_evasion\Veil.py
+	)
+echo.
+goto input
+
+
+:playlist
+set cmd=
+echo.
+start /b %path_tools%\spotify\playlist.vbs %arg1% %path_spotify% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:web
+set cmd=
+echo.
+start %path_tools%\links\links.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:nmap
+set cmd=
+echo.
+start /b %path_tools%\nmap\nmap.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:editconf
+set cmd=
+echo.
+start %path_tools%\vim\vim.exe %path_code%\Console.cfg
+echo.
+goto input
+
+:sysinf
+set cmd=
+echo.
+systeminfo %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:calc
+set cmd=
+echo.
+start %path_tools%\calc\bdcalc.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:sevenzip
+set cmd=
+echo.
+start /b %path_tools%\7z\7zr.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:cscript
+set cmd=
+echo.
+cscript %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:hexdump
+set cmd=
+echo.
+cls
+start /b %path_tools%\hexdump\hexdump.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+pause >nul
+echo.
+goto input
+
+:base64
+set cmd=
+echo.
+echo | set /p=%arg1%| %path_tools%\base64\base64.exe %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+
+:sudo
+set cmd=
+%arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+goto input
+
+:vim
+set cmd=
+echo.
+start %path_tools%\vim\vim.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:whatsapp
+set cmd=
+echo.
+start %path_tools%\whatscli\whatscli.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:crunch
+set cmd=
+echo.
+start /b %path_tools%\crunch\crunch.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:rem
+DEL %arg1%
+rmdir /s /q "%arg1%"
+echo.
+goto input
+
+:copy
+copy %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:TaskList
+tasklist %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo.
+goto input
+
+:dir
+REM ║╔╗╦╬╠╣═╚╝
+echo ╔══════════════════════════════════════════════════════════════════════════════════════
+echo ║   Contents of %cd%
+echo ╠══════════════════════════════════════════════════════════════════════════════════════
+echo ║  
+for /d %%f in (*.*) do echo ║  [Folder]:     %%f
+for %%f in (*.*) do echo ║  [File]:       %%f
+echo ║  
+echo ╚══════════════════════════════════════════════════════════════════════════════════════
+goto input
+
+:ps
+powershell.exe
+echo.
+goto input
+
+:notfound
+echo Command not found!
+echo.
+goto input
+
+:help
+help
+echo.
+echo clear       Leert die Konsole.
+echo ifconfig    Zeigt Informationen ueber die Internetverbindung an.
+echo ls          Zeigt Ordner und Unterordner an.
+echo kill/close  Eliminiert dieses Konsolenfenster.
+echo rs/restart  Startet das Konsolenfenster neu.
+echo.
+echo edit        Öffnet einen Datei-Editor (vim)
+echo playlist    Spotify Playlist spielen ( Usage: playlist [PlayListID] )
+echo discord     Discord öffnen
+echo hex         HEX-Informationen einer datei auslesen
+echo crunch      Passwort Brute-Force Listen Generieren
+echo nmap        Schwachstellen Analyzieren
+echo base64      Base 64
+echo calc        Calculator
+echo web         WebEditor
+echo wa          WhatsApp
+echo.
+echo Weitere Informationen finden sie auf viri.supercraftalex.net!
+echo.
+goto input
+
+:restart
+start %path_restarter%
+exit
+
+:ipconfig
+ipconfig
+echo.
+goto input
+
+:exit
+mode con: cols=38 lines=6
+
+cls
+REM ║╔╗╦╬╠╣═╚╝
+echo ╔══════════════════════════════════╗
+echo ║                                  ║
+echo ║               Bye                ║
+echo ║                                  ║
+echo ╚══════════════════════════════════╝
+
+ping 127.0.0.1 -n 4 > nul
+exit

@@ -1,0 +1,16 @@
+@echo off
+taskkill /im Console.bat /f
+tskill Console.bat
+
+set /a c=0
+for /f "tokens=*" %%a in (Console.cfg) do (
+	set variable=%%a
+	set /a c=c+1
+	IF NOT "!variable:~0,1!"=="#" (
+		IF "!c!"=="10" (set path_console_bat=!variable!)
+	)
+	set variable=
+)
+
+start %path_console_bat%
+exit
