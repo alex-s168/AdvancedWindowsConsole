@@ -18,8 +18,8 @@ exit
 :reconfig
 del /f Console.cfg
 
-echo #Main Color >> Console.cfg
-echo 0A >> Console.cfg
+echo #Main Color (NOT USED) >> Console.cfg
+echo 00 >> Console.cfg
 echo #Color Input Dialoge >> Console.cfg
 echo 92 >> Console.cfg
 echo #Color Command Output >> Console.cfg

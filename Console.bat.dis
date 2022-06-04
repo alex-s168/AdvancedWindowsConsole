@@ -5,15 +5,20 @@ setlocal enabledelayedexpansion
 ::                         TODO
 ::                Sudo befehl machen
 ::                eigenes apt machen
-REM ║╔╗╦╬╠╣═╚╝
+:: ║╔╗╦╬╠╣═╚╝
+
 cls
-color A
 title Virus Console
 echo Starting...
 chcp 65001
 set version=v1.1.5
-set old_dir=%cd%
-cd C:\Users\Alex\Desktop\VirusConsole\
+
+for /f "delims=" %%E in (
+    'forfiles /p "%~dp0." /m "%~nx0" /c "cmd /c echo(0x1B"'
+) do (
+    set "ESC=%%E"
+)
+
 goto loadconfig
 
 :loadconfig
@@ -41,83 +46,21 @@ for /f "tokens=*" %%a in (Console.cfg) do (
 	)
 	set variable=
 )
-::                     :~19,59
 
-IF "%color_main%"=="" ( 
-echo Config not set! Creating new...
-
-echo #Main Color >> Console.cfg
-echo 0A >> Console.cfg
-echo #Color Input Dialoge >> Console.cfg
-echo 92 >> Console.cfg
-echo #Color Command Output >> Console.cfg
-echo 94 >> Console.cfg
-echo #Color Input Text >> Console.cfg
-echo 91 >> Console.cfg
-echo #Console.bat PATH >> Console.cfg
-echo C:\Users\Alex\Desktop\VirusConsole\Console.bat >> Console.cfg
-echo #Library PATH >> Console.cfg
-echo C:\Users\Alex\Desktop\VirusConsole\Librarys >> Console.cfg
-echo #Tools PATH >> Console.cfg
-echo C:\Users\Alex\Desktop\VirusConsole\Tools >> Console.cfg
-echo #Restarter PATH >> Console.cfg
-echo C:\Users\Alex\Desktop\VirusConsole\Restarter.bat >> Console.cfg
-echo #Emoji PATH >> Console.cfg
-echo C:\Users\Alex\Desktop\VirusConsole\emoji.bat >> Console.cfg
-echo #Code Folder PATH >> Console.cfg
-echo C:\Users\Alex\Desktop\VirusConsole\ >> Console.cfg
-
-)
+FOR /F "tokens=*" %%g IN ('echo Powershell.exe -executionpolicy bypass -File %path_code%helper\releaseversion.ps1') do (set rcmd=%%g)
+FOR /F "tokens=*" %%e IN ('%rcmd%') do (set latest_version=%%e)
 
 echo - Succesful
-goto checklibs
-
-:checklibs
-echo Checking library 1/2
-If exist "%path_librarys%\Python\python.exe" (
-    Echo - Succesful
-)
-echo Checking library 2/2
-If exist "%path_librarys%\Ruby\bin\ruby.exe" (
-    Echo - Succesful
-)
-goto inittools
-
-:inittools
-echo Initalizing tools 1/3
-If exist "%path_tools%\crunch\" (
-    Echo - Succesful
-)
-echo Initalizing tools 2/3
-If exist "%path_tools%\nmap\" (
-    Echo - Succesful
-)
-echo Initalizing tools 3/3
-If exist "%path_tools%\veil_evasion\Veil.py" (
-	If exist "%path_tools%\veil_evasion\.NotWorking" (
-		Echo - Finished with warnings:     Veil-Evasion not supportet for this version of VirusConsole!
-	)
-	If NOT exist "%path_tools%\veil_evasion\.NotWorking" (
-		Echo - Succesful
-	)
-)
-
-goto initapps
 
 :initapps
 echo Loading custom commands...
 
-ping 127.0.0.1 -n 1 > nul
-
-IF "%1"=="here" (cd %old_dir%)
-
 goto start
 
 :start
-echo [%color_command_input%m
 cls
 echo.
-REM ║╔╗╦╬╠╣═╚╝
+echo %ESC%[%color_command_input%m
 echo ╔══════════════════════════════════════════════════╗
 echo ║                                                  ║
 echo ║               Virus Console %version%               ║
@@ -126,13 +69,19 @@ echo ╠════════════════════════
 echo ║                                                  ║
 echo ║       Made for proffessional programmers         ║
 echo ║                                                  ║
+if not "%latest_version%"=="%version%" (
+echo ╠══════════════════════════════════════════════════╣
+echo ║       You are using a outdated Version!          ║
+)
 echo ╚══════════════════════════════════════════════════╝
 echo.
+<nul set /p="%ESC%[0m
 goto input
 
 :clear
 cls
 echo.
+echo %ESC%[%color_command_input%m
 echo ╔══════════════════════════════════════════════════╗
 echo ║                                                  ║
 echo ║               Virus Console %version%               ║
@@ -143,15 +92,16 @@ echo ║       Made for proffessional programmers         ║
 echo ║                                                  ║
 echo ╚══════════════════════════════════════════════════╝
 echo.
+<nul set /p="%ESC%[0m
 
 :input
-REM ║╔╗╦╬╠╣═╚╝
-echo [%color_input%m╔══(%username%@%computername%)═[%CD%]
-set /p cmd="╚═ Command: [%color_command_text_input%m"
+echo %ESC%[%color_input%m╔══(%username%@%computername%)═[%CD%]
+set /p "cmd=╚═ Command: %ESC%[%color_command_text_input%m"
+<nul set /p="%ESC%[0m
 goto run
 
 :run
-echo [%color_command_input%m
+echo %ESC%[%color_command_input%m
 
 if "%cmd%"=="clc" (goto clear)
 if "%cmd%"=="cl" (goto clear)
@@ -350,7 +300,6 @@ goto runcontinue
 :menu
 set cmd=
 echo.
-REM ║╔╗╦╬╠╣═╚╝
 echo ╔═════════════════════════════════════╗
 echo ║       Simple Menu for Tools         ║
 echo ╠═════════════════════════════════════╣
@@ -572,7 +521,6 @@ echo.
 goto input
 
 :dir
-REM ║╔╗╦╬╠╣═╚╝
 echo ╔══════════════════════════════════════════════════════════════════════════════════════
 echo ║   Contents of %cd%
 echo ╠══════════════════════════════════════════════════════════════════════════════════════
