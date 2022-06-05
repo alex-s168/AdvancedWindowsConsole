@@ -132,7 +132,6 @@ if "%cmd%"=="ps" (goto ps)
 if "%cmd%"=="powershell" (goto ps)
 if "%cmd%"=="shell" (goto shell)
 if "%cmd%"=="s" (goto shell)
-if "%cmd%"=="veile" (goto veilevasion)
 if "%cmd%"=="vim" (goto vim)
 if "%cmd%"=="vi" (goto vim)
 if "%cmd%"=="edit" (goto vim)
@@ -376,44 +375,31 @@ IF "%hgr%"=="base64" (echo Base64)
 echo.
 goto input
 
-:veilevasion
-set cmd=
-echo.
-	If exist "%path_tools%\veil_evasion\.NotWorking" (
-		Echo Veil-Evasion not supportet for this version of VirusConsole!
-	)
-	If NOT exist "%path_tools%\veil_evasion\.NotWorking" (
-		start /b %path_librarys%\Python\python.exe %path_tools%\veil_evasion\Veil.py
-	)
-echo.
-goto input
-
-
 :playlist
 set cmd=
 echo.
-start /b %path_tools%\spotify\playlist.vbs %arg1% %path_spotify% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b "%path_tools%\spotify\playlist.vbs" %arg1% %path_spotify% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :web
 set cmd=
 echo.
-start %path_tools%\links\links.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start "%path_tools%\links\links.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :nmap
 set cmd=
 echo.
-start /b %path_tools%\nmap\nmap.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b "%path_tools%\nmap\nmap.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :editconf
 set cmd=
 echo.
-start %path_tools%\vim\vim.exe %path_code%\Console.cfg
+start "%path_tools%\vim\vim.exe" %path_code%\Console.cfg
 echo.
 goto input
 
@@ -427,14 +413,14 @@ goto input
 :calc
 set cmd=
 echo.
-start %path_tools%\calc\bdcalc.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start "%path_tools%\calc\bdcalc.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :sevenzip
 set cmd=
 echo.
-start /b %path_tools%\7z\7zr.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b "%path_tools%\7z\7zr.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
@@ -449,7 +435,7 @@ goto input
 set cmd=
 echo.
 cls
-start /b %path_tools%\hexdump\hexdump.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b "%path_tools%\hexdump\hexdump.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 pause >nul
 echo.
 goto input
@@ -457,7 +443,7 @@ goto input
 :base64
 set cmd=
 echo.
-echo | set /p=%arg1%| %path_tools%\base64\base64.exe %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo | set /p=%arg1%| "%path_tools%\base64\base64.exe" %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
@@ -470,21 +456,21 @@ goto input
 :vim
 set cmd=
 echo.
-start %path_tools%\vim\vim.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start "%path_tools%\vim\vim.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :whatsapp
 set cmd=
 echo.
-start %path_tools%\whatscli\whatscli.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start "%path_tools%\whatscli\whatscli.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :crunch
 set cmd=
 echo.
-start /b %path_tools%\crunch\crunch.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b "%path_tools%\crunch\crunch.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
@@ -544,8 +530,6 @@ echo base64      Base 64
 echo calc        Calculator
 echo web         WebEditor
 echo wa          WhatsApp
-echo.
-echo Weitere Informationen finden sie auf viri.supercraftalex.net!
 echo.
 goto input
 
