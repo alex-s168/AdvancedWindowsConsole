@@ -21,26 +21,17 @@ del CreateShortcut.vbs
 echo Creating config...
 :createconfig
 del /f Console.cfg
-echo #Main Color (NOT USED) >> Console.cfg
-echo 00 >> Console.cfg
-echo #Color Input Dialoge >> Console.cfg
-echo 92 >> Console.cfg
-echo #Color Command Output >> Console.cfg
-echo 94 >> Console.cfg
-echo #Color Input Text >> Console.cfg
-echo 91 >> Console.cfg
-echo #Console.bat PATH >> Console.cfg
-echo %cd%\Console.bat >> Console.cfg
-echo #Library PATH >> Console.cfg
-echo %cd%\Librarys >> Console.cfg
-echo #Tools PATH >> Console.cfg
-echo %cd%\Tools >> Console.cfg
-echo #Restarter PATH >> Console.cfg
-echo %cd%\Restarter.bat >> Console.cfg
-echo #Emoji PATH >> Console.cfg
-echo %cd%\emoji.bat >> Console.cfg
-echo #Code Folder PATH >> Console.cfg
-echo %cd% >> Console.cfg
+
+echo #Main Color (NOT USED)>> Console.cfg
+echo 00>> Console.cfg
+echo #Color Input Dialoge>> Console.cfg
+echo 92>> Console.cfg
+echo #Color Command Output>> Console.cfg
+echo 94>> Console.cfg
+echo #Color Input Text>> Console.cfg
+echo 91>> Console.cfg
+echo #Code Folder PATH>> Console.cfg
+echo %cd%>> Console.cfg
 
 echo Installing tools...
 :installtools

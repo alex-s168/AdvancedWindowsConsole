@@ -23,19 +23,13 @@ for /f "tokens=*" %%a in (Console.cfg) do (
 	set /a c=c+1
 	IF NOT "!variable:~0,1!"=="#" (
 	
-		IF "!c!"=="2" (color !variable!)
 		IF "!c!"=="2" (set color_main=!variable!)
 		
 		IF "!c!"=="4" (set color_input=!variable!)
 		IF "!c!"=="6" (set color_command_input=!variable!)
 		IF "!c!"=="8" (set color_command_text_input=!variable!)
-		IF "!c!"=="10" (set path_console_bat=!variable!)
-		IF "!c!"=="12" (set path_librarys=!variable!)
-		IF "!c!"=="14" (set path_tools=!variable!)
-		IF "!c!"=="16" (set path_restarter=!variable!)
-		IF "!c!"=="18" (set path_emoji=!variable!)
-		IF "!c!"=="20" (set path_spotify=!variable!)
-		IF "!c!"=="22" (set path_code=!variable!)
+		
+		IF "!c!"=="10" (set path_code=!variable!)
 		
 	)
 	set variable=
@@ -45,11 +39,6 @@ FOR /F "tokens=*" %%g IN ('echo Powershell.exe -executionpolicy bypass -File %pa
 FOR /F "tokens=*" %%e IN ('%rcmd%') do (set latest_version=%%e)
 
 echo - Succesful
-
-:initapps
-echo Loading custom commands...
-
-goto start
 
 :start
 cls
@@ -68,12 +57,6 @@ echo ╠════════════════════════
 echo ║        You are using a outdated Version!          ║
 )
 echo ╚══════════════════════════════════════════════════╝
-	set oldir=%cd%
-	cd %path_code%\packages
-	for /d %%D in (*) do (
-		echo %%~fD
-	)
-	cd %oldir%
 echo.
 <nul set /p="%ESC%[0m
 goto input
@@ -236,7 +219,6 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 	if "%%a"=="hexdump" (goto hexdump)
 	if "%%a"=="base64" (goto base64)
 	if "%%a"=="base" (goto base64)
-	if "%%a"=="playlist" (goto playlist)
 	if "%%a"=="vbs" (goto cscript)
 	if "%%a"=="sudo" (goto sudo)
 	if "%%a"=="7z" (goto sevenzip)
@@ -311,7 +293,7 @@ goto input
 
 
 :shell
-start %path_console_bat%
+start %path_code%\Console.bat
 echo.
 goto input
 
@@ -357,10 +339,7 @@ if NOT /f %arg1%=="" (
 	echo ╠════════════════════════════════════════════════════════════════════════════════════
 	echo ║                  Path Settings:        
 	echo ║                                                   
-	echo ║    Console path: %path_console_bat%
-	echo ║    Library path: %path_librarys%
-	echo ║      Tools path: %path_tools%
-	echo ║  Restarter path: %path_restarter%
+	echo ║    Code Folder: %path_code%
 	echo ╚════════════════════════════════════════════════════════════════════════════════════
 )
 
@@ -369,36 +348,29 @@ goto input
 
 :helpspec
 set cmd=
-IF "%hgr%"=="hexdump" (%path_tools%\hexdump\hexdump.exe -h)
+IF "%hgr%"=="hexdump" (%path_code%\Tools\hexdump\hexdump.exe -h)
 IF "%hgr%"=="base64" (echo Base64)
-echo.
-goto input
-
-:playlist
-set cmd=
-echo.
-start /b %path_tools%\spotify\playlist.vbs %arg1% %path_spotify% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :web
 set cmd=
 echo.
-start %path_tools%\links\links.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start %path_code%\Tools\links\links.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :nmap
 set cmd=
 echo.
-start /b %path_tools%\nmap\nmap.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b %path_code%\Tools\nmap\nmap.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :editconf
 set cmd=
 echo.
-start %path_tools%\vim\vim.exe %path_code%\Console.cfg
+start %path_code%\Tools\vim\vim.exe %path_code%\Console.cfg
 echo.
 goto input
 
@@ -412,14 +384,14 @@ goto input
 :calc
 set cmd=
 echo.
-start %path_tools%\calc\bdcalc.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start %path_code%\Tools\calc\bdcalc.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :sevenzip
 set cmd=
 echo.
-start /b %path_tools%\7z\7zr.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b %path_code%\Tools\7z\7zr.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
@@ -434,7 +406,7 @@ goto input
 set cmd=
 echo.
 cls
-start /b %path_tools%\hexdump\hexdump.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b %path_code%\Tools\hexdump\hexdump.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 pause >nul
 echo.
 goto input
@@ -442,7 +414,7 @@ goto input
 :base64
 set cmd=
 echo.
-echo | set /p=%arg1%| %path_tools%\base64\base64.exe %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo | set /p=%arg1%| %path_code%\Tools\base64\base64.exe %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
@@ -455,21 +427,21 @@ goto input
 :vim
 set cmd=
 echo.
-start %path_tools%\vim\vim.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start %path_code%\Tools\vim\vim.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :whatsapp
 set cmd=
 echo.
-start %path_tools%\whatscli\whatscli.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start %path_code%\Tools\whatscli\whatscli.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :crunch
 set cmd=
 echo.
-start /b %path_tools%\crunch\crunch.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b %path_code%\Tools\crunch\crunch.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
@@ -526,7 +498,6 @@ echo kill/close  Eliminiert dieses Konsolenfenster.
 echo rs/restart  Startet das Konsolenfenster neu.
 echo.
 echo edit        Öffnet einen Datei-Editor (vim)
-echo playlist    Spotify Playlist spielen ( Usage: playlist [PlayListID] )
 echo discord     Discord öffnen
 echo hex         HEX-Informationen einer datei auslesen
 echo crunch      Passwort Brute-Force Listen Generieren
@@ -540,7 +511,7 @@ goto input
 
 :restart
 set cmd=
-start %path_restarter%
+start %path_code%\Restarter.bat
 exit
 
 :ipconfig
@@ -562,3 +533,30 @@ echo ╚════════════════════════
 
 ping 127.0.0.1 -n 4 > nul
 exit
+
+:pck
+echo.
+set cmd=
+IF "%arg1%"=="help" (
+	echo pck list             -   List all installed packages
+	echo pck update           -   Looks for updates of packages and installes them
+	echo pck get [name/link]  -   Downloads a package
+	echo pck rem [name]       -   Removes a package
+)
+IF "%arg1%"=="" (
+	echo pck list             -   List all installed packages
+	echo pck update           -   Looks for updates of packages and installes them
+	echo pck get [name/link]  -   Downloads a package
+	echo pck rem [name]       -   Removes a package
+)
+IF "%arg1%"=="list" (
+	set oldir=%cd%
+	cd %path_code%\packages
+	for /d %%D in (*) do (
+		echo %%~fD
+	)
+	cd %oldir%
+)
+
+echo.
+goto input
