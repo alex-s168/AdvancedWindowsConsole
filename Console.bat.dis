@@ -279,9 +279,12 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 		set variable=
 	)
 	
-	for /d %%D in (%path_code%\packages*) do (
+	set oldir=%cd%
+	cd %path_code%\packages
+	for /d %%D in (*) do (
 		echo %%~fD
 	)
+	cd %oldir%
 )
 goto runcontinue
 
