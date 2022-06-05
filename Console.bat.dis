@@ -270,6 +270,28 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 		set variable=
 	)
 	
+	set oldir=%cd%
+	cd %path_code%\packages
+	for /d %%D in (*) do (
+		cd %%D>nul
+		for /f "tokens=*" %%a in (commands.cfg) do (
+			set variable=%%a
+			set /a c=c+1
+			
+			FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
+				IF  "%%G"=="%cmd%" (
+					%%H
+					echo.
+					goto input
+				)
+			)
+			
+			set variable=
+		)
+		cd..>nul
+	)
+	cd %oldir%>nul
+	
 )
 goto runcontinue
 
