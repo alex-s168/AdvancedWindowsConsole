@@ -24,7 +24,7 @@ Includes many tools and shorts for some commands
 
 # How to install:
 1. Step:      Get the latest release from the release tab
-2. Step:      Unzip it and move it anywhere you want
+2. Step:      Unzip it and move it anywhere you want (Path shouldn't have spaces in it)
 3. Step:      Run the Setup.bat script to automatically download all needed Tools and setup everything
 4. Step:      You now can run the Console.bat script (There is also an .lnk file on the desktop)
 
