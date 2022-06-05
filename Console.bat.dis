@@ -563,21 +563,19 @@ set cmd=
 IF "%arg1%"=="help" (
 	echo pck list             -    List all installed packages
 	echo pck update           -    Looks for updates of packages and installes them
-	echo pck get [name/link]  -    Downloads a package
+	echo pck get [name]       -    Downloads a package
 	echo pck rem [name]       -    Removes a package
 	echo pck info [name]      -    Get advanced informations about a package
 )
 IF "%arg1%"=="" (
 	echo pck list             -    List all installed packages
 	echo pck update           -    Looks for updates of packages and installes them
-	echo pck get [name/link]  -    Downloads a package
+	echo pck get [name]       -    Downloads a package
 	echo pck rem [name]       -    Removes a package
 	echo pck info [name]      -    Get advanced informations about a package
 )
 IF "%arg1%"=="list" (
-	set oldir=%cd%
-	cd %path_code%\packages
-	for /d %%D in (*) do (
+	for /d %%D in (%path_code%\packages\*) do (
 		set /a c=0
 		for /f "tokens=*" %%a in (%%~fD\info.md) do (
 			set variable=%%a
@@ -588,15 +586,11 @@ IF "%arg1%"=="list" (
 			set variable=
 		)
 	)
-	cd %oldir%>nul
 )
 IF "%arg1%"=="info" (
-	set oldir=%cd%
-	cd %path_code%\packages
-	cd %arg2%
 	echo Name:          %arg2%
 	set /a c=0
-	for /f "tokens=*" %%a in (info.md) do (
+	for /f "tokens=*" %%a in (%path_code%\packages\%arg2%\info.md) do (
 		set variable=%%a
 		set /a c=c+1
 		
@@ -612,7 +606,7 @@ IF "%arg1%"=="info" (
 	echo.
 	echo Commands:
 	set /a c=0
-	for /f "tokens=*" %%a in (commands.cfg) do (
+	for /f "tokens=*" %%a in (%path_code%\packages\%arg2%\commands.cfg) do (
 		set variable=%%a
 		set /a c=c+1
 		
@@ -624,6 +618,25 @@ IF "%arg1%"=="info" (
 	)
 	cd %oldir%>nul
 )
-
+IF "%arg1%"=="get" (
+	curl -o downl.zip https://kinolien.github.io/gitzip/?download=https://github.com/SuperCraftAlex/AdvancedWindowsConsole-Packages/tree/main/%arg2%
+	Call :UnZipFile "%cd%\packages" "%cd%\downl.zip"
+	del /f downl.zip
+)
 echo.
 goto input
+
+:UnZipFile <ExtractTo> <newzipfile>
+set vbs="%temp%\_.vbs"
+if exist %vbs% del /f /q %vbs%
+>%vbs%  echo Set fso = CreateObject("Scripting.FileSystemObject")
+>>%vbs% echo If NOT fso.FolderExists(%1) Then
+>>%vbs% echo fso.CreateFolder(%1)
+>>%vbs% echo End If
+>>%vbs% echo set objShell = CreateObject("Shell.Application")
+>>%vbs% echo set FilesInZip=objShell.NameSpace(%2).items
+>>%vbs% echo objShell.NameSpace(%1).CopyHere(FilesInZip)
+>>%vbs% echo Set fso = Nothing
+>>%vbs% echo Set objShell = Nothing
+cscript //nologo %vbs%
+if exist %vbs% del /f /q %vbs%
