@@ -378,28 +378,28 @@ goto input
 :playlist
 set cmd=
 echo.
-start /b "%path_tools%\spotify\playlist.vbs" %arg1% %path_spotify% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b %path_tools%\spotify\playlist.vbs %arg1% %path_spotify% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :web
 set cmd=
 echo.
-start "%path_tools%\links\links.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start %path_tools%\links\links.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :nmap
 set cmd=
 echo.
-start /b "%path_tools%\nmap\nmap.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b %path_tools%\nmap\nmap.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :editconf
 set cmd=
 echo.
-start "%path_tools%\vim\vim.exe" %path_code%\Console.cfg
+start %path_tools%\vim\vim.exe %path_code%\Console.cfg
 echo.
 goto input
 
@@ -413,14 +413,14 @@ goto input
 :calc
 set cmd=
 echo.
-start "%path_tools%\calc\bdcalc.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start %path_tools%\calc\bdcalc.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :sevenzip
 set cmd=
 echo.
-start /b "%path_tools%\7z\7zr.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b %path_tools%\7z\7zr.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
@@ -435,7 +435,7 @@ goto input
 set cmd=
 echo.
 cls
-start /b "%path_tools%\hexdump\hexdump.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b %path_tools%\hexdump\hexdump.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 pause >nul
 echo.
 goto input
@@ -443,7 +443,7 @@ goto input
 :base64
 set cmd=
 echo.
-echo | set /p=%arg1%| "%path_tools%\base64\base64.exe" %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+echo | set /p=%arg1%| %path_tools%\base64\base64.exe %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
@@ -456,21 +456,21 @@ goto input
 :vim
 set cmd=
 echo.
-start "%path_tools%\vim\vim.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start %path_tools%\vim\vim.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :whatsapp
 set cmd=
 echo.
-start "%path_tools%\whatscli\whatscli.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start %path_tools%\whatscli\whatscli.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :crunch
 set cmd=
 echo.
-start /b "%path_tools%\crunch\crunch.exe" %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
+start /b %path_tools%\crunch\crunch.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
