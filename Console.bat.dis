@@ -252,13 +252,13 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 		)
 	)
 	set /a c=0
-	for /f "tokens=*" %%a in (%path_code%\APPS.cfg) do (
-		set variable=%%a
+	for /f "tokens=*" %%j in (%path_code%\APPS.cfg) do (
+		set variable=%%j
 		set /a c=c+1
 		FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
 		
-			IF  "%%G"=="%cmd%" (
-			
+			IF  "%%G"=="%%a" (
+				set cmd=
 				%%H
 				echo.
 				goto input
@@ -270,27 +270,23 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 		set variable=
 	)
 	
-	set oldir=%cd%
-	cd %path_code%\packages
-	for /d %%D in (*) do (
-		cd %%D>nul
-		for /f "tokens=*" %%a in (commands.cfg) do (
-			set variable=%%a
+	set /a c=0
+	for /d %%D in (%path_code%\packages\*) do (
+		for /f "tokens=*" %%j in (%%D\commands.cfg) do (
+			set variable=%%j
 			set /a c=c+1
 			
 			FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
-				IF  "%%G"=="%cmd%" (
+				IF  "%%G"=="%%a" (
+					set cmd=
 					%%H
 					echo.
 					goto input
 				)
 			)
-			
 			set variable=
 		)
-		cd..>nul
 	)
-	cd %oldir%>nul
 	
 )
 goto runcontinue
@@ -623,9 +619,7 @@ IF "%arg1%"=="info" (
 		
 		set variable=
 	)
-	echo.
-	echo Directory:
-	cd %oldir%
+	cd %oldir%>nul
 )
 
 echo.
