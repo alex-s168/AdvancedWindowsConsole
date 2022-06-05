@@ -1,13 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
 
-::
-::                         TODO
-::                Sudo befehl machen
-::                eigenes apt machen
-:: ║╔╗╦╬╠╣═╚╝
-
-
 cls
 title AdvancedWindowsConsole
 echo Starting...
