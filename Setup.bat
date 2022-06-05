@@ -6,7 +6,6 @@ pause
 echo Enabling files...
 
 rename Console.bat.dis Console.bat
-rename emoji.bat.dis emoji.bat
 rename Restarter.bat.dis Restarter.bat
 
 echo Createing desktop shortcut...

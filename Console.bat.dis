@@ -8,7 +8,7 @@ setlocal enabledelayedexpansion
 :: ║╔╗╦╬╠╣═╚╝
 
 cls
-title Virus Console
+title AdvancedWindowsConsole
 echo Starting...
 chcp 65001
 set version=v1.1.6
@@ -63,7 +63,7 @@ echo.
 echo %ESC%[%color_command_input%m
 echo ╔══════════════════════════════════════════════════╗
 echo ║                                                  ║
-echo ║               Virus Console %version%               ║
+echo ║        AdvancedWindowsConsole %version%             ║
 echo ║                                                  ║
 echo ╠══════════════════════════════════════════════════╣
 echo ║                                                  ║
@@ -84,7 +84,7 @@ echo.
 echo %ESC%[%color_command_input%m
 echo ╔══════════════════════════════════════════════════╗
 echo ║                                                  ║
-echo ║               Virus Console %version%               ║
+echo ║        AdvancedWindowsConsole %version%             ║
 echo ║                                                  ║
 echo ╠══════════════════════════════════════════════════╣
 echo ║                                                  ║
@@ -131,15 +131,7 @@ if "%cmd%"=="ps" (goto ps)
 if "%cmd%"=="powershell" (goto ps)
 if "%cmd%"=="shell" (goto shell)
 if "%cmd%"=="s" (goto shell)
-if "%cmd%"=="ve" (goto veilevasion)
-if "%cmd%"=="veilevasion" (goto veilevasion)
-if "%cmd%"=="veil_evasion" (goto veilevasion)
-if "%cmd%"=="vevasion" (goto veilevasion)
 if "%cmd%"=="veile" (goto veilevasion)
-if "%cmd%"=="emoji" (goto emoji)
-if "%cmd%"=="vemoji" (goto emoji)
-if "%cmd%"=="viriemoji" (goto emoji)
-if "%cmd%"=="hack" (goto hack)
 if "%cmd%"=="vim" (goto vim)
 if "%cmd%"=="vi" (goto vim)
 if "%cmd%"=="edit" (goto vim)
@@ -370,7 +362,6 @@ if NOT /f %arg1%=="" (
 	echo ║    Library path: %path_librarys%
 	echo ║      Tools path: %path_tools%
 	echo ║  Restarter path: %path_restarter%
-	echo ║      Emoji path: %path_emoji%
 	echo ╚════════════════════════════════════════════════════════════════════════════════════
 )
 
@@ -383,14 +374,6 @@ IF "%hgr%"=="hexdump" (%path_tools%\hexdump\hexdump.exe -h)
 IF "%hgr%"=="base64" (echo Base64)
 echo.
 goto input
-
-:emoji
-start %path_emoji%
-goto input
-
-:hack
-echo %random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%
-goto hack
 
 :veilevasion
 set cmd=
