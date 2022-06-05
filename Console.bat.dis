@@ -5,7 +5,7 @@ cls
 title AdvancedWindowsConsole
 echo Starting...
 chcp 65001
-set version=v1.1.6
+set version=v1.1.7
 
 for /f "delims=" %%E in (
     'forfiles /p "%~dp0." /m "%~nx0" /c "cmd /c echo(0x1B"'
