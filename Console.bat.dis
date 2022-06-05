@@ -224,14 +224,15 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 	if "%%a"=="7z" (goto sevenzip)
 	if "%%a"=="zip" (goto sevenzip)
 	if "%%a"=="7zip" (goto sevenzip)
-	if "%cmd%"=="sys" (goto sysinf)
-	if "%cmd%"=="sysinf" (goto sysinf)
-	if "%cmd%"=="system" (goto sysinf)
-	if "%cmd%"=="systeminf" (goto sysinf)
-	if "%cmd%"=="web" (goto web)
-	if "%cmd%"=="links" (goto web)
-	if "%cmd%"=="pck" (goto pck)
-	if "%cmd%"=="package" (goto pck)
+	if "%%a"=="sys" (goto sysinf)
+	if "%%a"=="sysinf" (goto sysinf)
+	if "%%a"=="system" (goto sysinf)
+	if "%%a"=="systeminf" (goto sysinf)
+	if "%%a"=="web" (goto web)
+	if "%%a"=="links" (goto web)
+	if "%%a"=="pck" (goto pck)
+	if "%%a"=="package" (goto pck)
+
 	if "%%a"=="help" (
 		if "%%b"=="hd" (
 			set hgr=hexdump
@@ -537,7 +538,6 @@ ping 127.0.0.1 -n 4 > nul
 exit
 
 :pck
-echo.
 set cmd=
 IF "%arg1%"=="help" (
 	echo pck list             -   List all installed packages
