@@ -65,7 +65,7 @@ echo ║       Made for proffessional programmers         ║
 echo ║                                                  ║
 if not "%latest_version%"=="%version%" (
 echo ╠══════════════════════════════════════════════════╣
-echo ║       You are using a outdated Version!          ║
+echo ║        You are using a outdated Version!          ║
 )
 echo ╚══════════════════════════════════════════════════╝
 echo.
