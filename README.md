@@ -7,18 +7,19 @@ Includes many tools and shorts for some commands
 
 # Included tools:
 - SevenZIP
-- Base64
+- Base64 (Removed in new version)
 - VIM
-- bdcalc
-- crunch
-- nmap
+- bdcalc (Removed in new version)
+- crunch (Removed in new version)
+- nmap (Removed in new version)
 - hexdump
-- whatsapp cli
+- whatsapp cli (Removed in new version)
 
 ![image](https://user-images.githubusercontent.com/63254202/172021554-4094a327-31ab-4133-be60-74bc2a21f4cf.png)
 ![image](https://user-images.githubusercontent.com/63254202/172021562-3277ea48-4d97-4801-9fa5-9e5dd51cbb6d.png)
 
 # Other Features:
+- Package system (See aviable packages at: https://github.com/SuperCraftAlex/AdvancedWindowsConsole-Packages)
 - Config file to change the colors of the console
 - app config file -> you can add custom commands
 
