@@ -138,7 +138,7 @@ if "%cmd%"=="apps" (goto apps)
 if "%cmd%"=="menu" (goto menu)
 if "%cmd%"=="test" (goto test)
 set /a c=0
-for /f "tokens=*" %%a in (%path_code%APPS.cfg) do (
+for /f "tokens=*" %%a in (%path_code%\APPS.cfg) do (
 	set variable=%%a
 	set /a c=c+1
 	FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
@@ -230,6 +230,8 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 	if "%cmd%"=="systeminf" (goto sysinf)
 	if "%cmd%"=="web" (goto web)
 	if "%cmd%"=="links" (goto web)
+	if "%cmd%"=="pck" (goto pck)
+	if "%cmd%"=="package" (goto pck)
 	if "%%a"=="help" (
 		if "%%b"=="hd" (
 			set hgr=hexdump
@@ -249,7 +251,7 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 		)
 	)
 	set /a c=0
-	for /f "tokens=*" %%a in (%path_code%APPS.cfg) do (
+	for /f "tokens=*" %%a in (%path_code%\APPS.cfg) do (
 		set variable=%%a
 		set /a c=c+1
 		FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
@@ -311,7 +313,7 @@ goto input
 echo.
 set cmd=
 set /a c=0
-for /f "tokens=*" %%a in (%path_code%APPS.cfg) do (
+for /f "tokens=*" %%a in (%path_code%\APPS.cfg) do (
 	set variable=%%a
 	set /a c=c+1
 	FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
