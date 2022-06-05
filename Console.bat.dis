@@ -68,6 +68,12 @@ echo ╠════════════════════════
 echo ║        You are using a outdated Version!          ║
 )
 echo ╚══════════════════════════════════════════════════╝
+	set oldir=%cd%
+	cd %path_code%\packages
+	for /d %%D in (*) do (
+		echo %%~fD
+	)
+	cd %oldir%
 echo.
 <nul set /p="%ESC%[0m
 goto input
@@ -279,12 +285,6 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 		set variable=
 	)
 	
-	set oldir=%cd%
-	cd %path_code%\packages
-	for /d %%D in (*) do (
-		echo %%~fD
-	)
-	cd %oldir%
 )
 goto runcontinue
 
@@ -474,22 +474,26 @@ echo.
 goto input
 
 :rem
+set cmd=
 DEL %arg1%
 rmdir /s /q "%arg1%"
 echo.
 goto input
 
 :copy
+set cmd=
 copy %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :TaskList
+set cmd=
 tasklist %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
 :dir
+set cmd=
 echo ╔══════════════════════════════════════════════════════════════════════════════════════
 echo ║   Contents of %cd%
 echo ╠══════════════════════════════════════════════════════════════════════════════════════
@@ -501,6 +505,7 @@ echo ╚════════════════════════
 goto input
 
 :ps
+set cmd=
 powershell.exe
 echo.
 goto input
@@ -511,6 +516,7 @@ echo.
 goto input
 
 :help
+set cmd=
 help
 echo.
 echo clear       Leert die Konsole.
@@ -533,10 +539,12 @@ echo.
 goto input
 
 :restart
+set cmd=
 start %path_restarter%
 exit
 
 :ipconfig
+set cmd=
 ipconfig
 echo.
 goto input
