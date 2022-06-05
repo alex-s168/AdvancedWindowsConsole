@@ -540,23 +540,69 @@ exit
 :pck
 set cmd=
 IF "%arg1%"=="help" (
-	echo pck list             -   List all installed packages
-	echo pck update           -   Looks for updates of packages and installes them
-	echo pck get [name/link]  -   Downloads a package
-	echo pck rem [name]       -   Removes a package
+	echo pck list             -    List all installed packages
+	echo pck update           -    Looks for updates of packages and installes them
+	echo pck get [name/link]  -    Downloads a package
+	echo pck rem [name]       -    Removes a package
+	echo pck info [name]      -    Get advanced informations about a package
 )
 IF "%arg1%"=="" (
-	echo pck list             -   List all installed packages
-	echo pck update           -   Looks for updates of packages and installes them
-	echo pck get [name/link]  -   Downloads a package
-	echo pck rem [name]       -   Removes a package
+	echo pck list             -    List all installed packages
+	echo pck update           -    Looks for updates of packages and installes them
+	echo pck get [name/link]  -    Downloads a package
+	echo pck rem [name]       -    Removes a package
+	echo pck info [name]      -    Get advanced informations about a package
 )
 IF "%arg1%"=="list" (
 	set oldir=%cd%
 	cd %path_code%\packages
 	for /d %%D in (*) do (
-		echo %%~fD
+		set /a c=0
+		for /f "tokens=*" %%a in (%%~fD\info.md) do (
+			set variable=%%a
+			set /a c=c+1
+			
+			IF "!c!"=="1" (echo %%D   -   !variable!)
+			
+			set variable=
+		)
 	)
+	cd %oldir%>nul
+)
+IF "%arg1%"=="info" (
+	set oldir=%cd%
+	cd %path_code%\packages
+	cd %arg2%
+	echo Name:          %arg2%
+	set /a c=0
+	for /f "tokens=*" %%a in (info.md) do (
+		set variable=%%a
+		set /a c=c+1
+		
+		IF "!c!"=="1" (echo Title:         !variable!)
+		IF "!c!"=="2" (echo Description:   !variable!)
+		IF "!c!"=="3" (
+			echo.
+			echo Link:          !variable!
+		)
+		
+		set variable=
+	)
+	echo.
+	echo Commands:
+	set /a c=0
+	for /f "tokens=*" %%a in (commands.cfg) do (
+		set variable=%%a
+		set /a c=c+1
+		
+		FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
+			echo -  %%G
+		)
+		
+		set variable=
+	)
+	echo.
+	echo Directory:
 	cd %oldir%
 )
 
