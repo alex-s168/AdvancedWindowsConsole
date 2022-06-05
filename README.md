@@ -23,10 +23,10 @@ Includes many tools and shorts for some commands
 - app config file -> you can add custom commands
 
 # How to install:
-1. Step:      Get the latest release from the release tab
-2. Step:      Unzip it and move it anywhere you want (Path shouldn't have spaces in it)
-3. Step:      Run the Setup.bat script to automatically download all needed Tools and setup everything
-4. Step:      You now can run the Console.bat script (There is also an .lnk file on the desktop)
+Setp 1:      Get the latest release from the release tab (you can also just download the source)
+Step 2:      Unzip it and move it anywhere you want (Path shouldn't have spaces in it)
+Step 3:      Run the Setup.bat script to automatically download all needed Tools and setup everything
+Step 4:      You now can run the Console.bat script (There is also an .lnk file on the desktop)
 
 # How to update:
 Run the Update.bat file to download all updates
