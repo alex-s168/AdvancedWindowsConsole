@@ -7,6 +7,8 @@ echo Starting...
 chcp 65001
 set version=v1.1.7
 
+del /f Setup.bat
+
 for /f "delims=" %%E in (
     'forfiles /p "%~dp0." /m "%~nx0" /c "cmd /c echo(0x1B"'
 ) do (
@@ -22,15 +24,15 @@ for /f "tokens=*" %%a in (Console.cfg) do (
 	set variable=%%a
 	set /a c=c+1
 	IF NOT "!variable:~0,1!"=="#" (
-	
+
 		IF "!c!"=="2" (set color_main=!variable!)
-		
+
 		IF "!c!"=="4" (set color_input=!variable!)
 		IF "!c!"=="6" (set color_command_input=!variable!)
 		IF "!c!"=="8" (set color_command_text_input=!variable!)
-		
+
 		IF "!c!"=="10" (set path_code=!variable!)
-		
+
 	)
 	set variable=
 )
@@ -117,9 +119,6 @@ if "%cmd%"=="s" (goto shell)
 if "%cmd%"=="vim" (goto vim)
 if "%cmd%"=="vi" (goto vim)
 if "%cmd%"=="edit" (goto vim)
-if "%cmd%"=="dc" (dterm)
-if "%cmd%"=="dis" (dterm)
-if "%cmd%"=="discord" (dterm)
 if "%cmd%"=="calc" (goto calc)
 if "%cmd%"=="calculator" (goto calc)
 if "%cmd%"=="edit conf" (goto editconf)
@@ -131,28 +130,26 @@ if "%cmd%"=="sys" (goto sysinf)
 if "%cmd%"=="sysinf" (goto sysinf)
 if "%cmd%"=="system" (goto sysinf)
 if "%cmd%"=="systeminf" (goto sysinf)
-if "%cmd%"=="wa" (goto whatsapp)
-if "%cmd%"=="chat" (goto whatsapp)
-if "%cmd%"=="whatsapp" (goto whatsapp)
 if "%cmd%"=="apps" (goto apps)
 if "%cmd%"=="menu" (goto menu)
 if "%cmd%"=="test" (goto test)
+if "%cmd%"=="info" (goto info)
 set /a c=0
 for /f "tokens=*" %%a in (%path_code%\APPS.cfg) do (
 	set variable=%%a
 	set /a c=c+1
 	FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
-	
+
 		IF  "%%G"=="%cmd%" (
-		
+
 			%%H
 			echo.
 			goto input
-			
+
 		)
-	
+
 	)
-	
+
 	set variable=
 )
 
@@ -178,7 +175,7 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 	set arg8=%%i
 	set arg9=%%j
 	set arg10=%%k
-	
+
 	if "%%a"=="cp" (goto copy)
 	if "%%a"=="mv" (goto copy)
 	if "%%a"=="mov" (goto copy)
@@ -256,26 +253,26 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 		set variable=%%j
 		set /a c=c+1
 		FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
-		
+
 			IF  "%%G"=="%%a" (
 				set cmd=
 				%%H
 				echo.
 				goto input
-				
+
 			)
-		
+
 		)
-		
+
 		set variable=
 	)
-	
+
 	set /a c=0
 	for /d %%D in (%path_code%\packages\*) do (
 		for /f "tokens=*" %%j in (%%D\commands.cfg) do (
 			set variable=%%j
 			set /a c=c+1
-			
+
 			FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
 				IF  "%%G"=="%%a" (
 					set cmd=
@@ -287,7 +284,7 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 			set variable=
 		)
 	)
-	
+
 )
 goto runcontinue
 
@@ -297,7 +294,7 @@ echo.
 echo ╔═════════════════════════════════════╗
 echo ║       Simple Menu for Tools         ║
 echo ╠═════════════════════════════════════╣
-echo ║[v] = vim              [d] = discord ║
+echo ║[v] = vim                            ║
 echo ║[c] = calc             [w] = web     ║
 echo ║            [e] = exit               ║
 echo ╚═════════════════════════════════════╝
@@ -336,13 +333,20 @@ for /f "tokens=*" %%a in (%path_code%\APPS.cfg) do (
 	set variable=%%a
 	set /a c=c+1
 	FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
-	
+
 		echo APP/COMMAND:  %%G               %%H
-	
+
 	)
-	
+
 	set variable=
 )
+echo.
+goto input
+
+:info
+echo AdvancedWindowsConsole
+echo Version: %version%
+echo Latest: %latest_version%
 echo.
 goto input
 
@@ -350,16 +354,16 @@ goto input
 REM ║╔╗╦╬╠╣═╚╝
 if NOT /f %arg1%=="" (
 	echo ╔════════════════════════════════════════════════════════════════════════════════════
-	echo ║                  Current settings:                
+	echo ║                  Current settings:
 	echo ╠════════════════════════════════════════════════════════════════════════════════════
-	echo ║                   Color Settings:                 
-	echo ║                                                   
-	echo ║                   Main color: %color_main%                     
-	echo ║                  Input color: %color_input%                   
-	echo ║              Command Input color: %color_command_input%               
+	echo ║                   Color Settings:
+	echo ║
+	echo ║                   Main color: %color_main%
+	echo ║                  Input color: %color_input%
+	echo ║              Command Input color: %color_command_input%
 	echo ╠════════════════════════════════════════════════════════════════════════════════════
-	echo ║                  Path Settings:        
-	echo ║                                                   
+	echo ║                  Path Settings:
+	echo ║
 	echo ║    Code Folder: %path_code%
 	echo ╚════════════════════════════════════════════════════════════════════════════════════
 )
@@ -490,10 +494,10 @@ set cmd=
 echo ╔══════════════════════════════════════════════════════════════════════════════════════
 echo ║   Contents of %cd%
 echo ╠══════════════════════════════════════════════════════════════════════════════════════
-echo ║  
+echo ║
 for /d %%f in (*.*) do echo ║  [Folder]:     %%f
 for %%f in (*.*) do echo ║  [File]:       %%f
-echo ║  
+echo ║
 echo ╚══════════════════════════════════════════════════════════════════════════════════════
 goto input
 
@@ -579,9 +583,9 @@ IF "%arg1%"=="list" (
 		for /f "tokens=*" %%a in (%%~fD\info.md) do (
 			set variable=%%a
 			set /a c=c+1
-			
+
 			IF "!c!"=="1" (echo %%D   -   !variable!)
-			
+
 			set variable=
 		)
 	)
@@ -596,14 +600,14 @@ IF "%arg1%"=="info" (
 	for /f "tokens=*" %%a in (info.md) do (
 		set variable=%%a
 		set /a c=c+1
-		
+
 		IF "!c!"=="1" (echo Title:         !variable!)
 		IF "!c!"=="2" (echo Description:   !variable!)
 		IF "!c!"=="3" (
 			echo.
 			echo Link:          !variable!
 		)
-		
+
 		set variable=
 	)
 	echo.
@@ -612,11 +616,11 @@ IF "%arg1%"=="info" (
 	for /f "tokens=*" %%a in (commands.cfg) do (
 		set variable=%%a
 		set /a c=c+1
-		
+
 		FOR /F "tokens=1-2 delims=#" %%G IN ("!variable!") DO (
 			echo -  %%G
 		)
-		
+
 		set variable=
 	)
 	cd %oldir%>nul
