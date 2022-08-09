@@ -1,5 +1,5 @@
 # AdvancedWindowsConsole
-! ONLY FOR WINDOWS 10 OR HIGHER !
+ONLY FOR WINDOWS 10 OR HIGHER
 
 A extension of the Windows CMD shell written in .bat
 
@@ -14,8 +14,9 @@ Includes many tools and shorts for some commands
 - nmap (Removed in new version -> See wiki section "packages")
 - hexdump
 
-![image](https://user-images.githubusercontent.com/63254202/172021554-4094a327-31ab-4133-be60-74bc2a21f4cf.png)
-![image](https://user-images.githubusercontent.com/63254202/172021562-3277ea48-4d97-4801-9fa5-9e5dd51cbb6d.png)
+![image](https://user-images.githubusercontent.com/63254202/183615617-25ae3366-cc26-4e4b-bd1e-fc4d6e4160b4.png)
+![image](https://user-images.githubusercontent.com/63254202/183615655-386a5a19-528a-4ee1-a193-f4fffc13a93b.png)
+(Console looks cooler on Windows 11
 
 # Other Features:
 - Package system (For more information about how it works look at the wiki section "packages") (See aviable packages at: https://github.com/SuperCraftAlex/AdvancedWindowsConsole-Packages)
