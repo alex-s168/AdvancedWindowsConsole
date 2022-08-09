@@ -13,7 +13,6 @@ Includes many tools and shorts for some commands
 - crunch (Removed in new version -> See wiki section "packages")
 - nmap (Removed in new version -> See wiki section "packages")
 - hexdump
-- whatsapp cli (Removed in new version -> See wiki section "packages")
 
 ![image](https://user-images.githubusercontent.com/63254202/172021554-4094a327-31ab-4133-be60-74bc2a21f4cf.png)
 ![image](https://user-images.githubusercontent.com/63254202/172021562-3277ea48-4d97-4801-9fa5-9e5dd51cbb6d.png)

@@ -134,6 +134,7 @@ if "%cmd%"=="apps" (goto apps)
 if "%cmd%"=="menu" (goto menu)
 if "%cmd%"=="test" (goto test)
 if "%cmd%"=="info" (goto info)
+if "%cmd%"=="update" (goto update)
 set /a c=0
 for /f "tokens=*" %%a in (%path_code%\APPS.cfg) do (
 	set variable=%%a
@@ -343,6 +344,11 @@ for /f "tokens=*" %%a in (%path_code%\APPS.cfg) do (
 
 	set variable=
 )
+echo.
+goto input
+
+:update
+echo Please run Update.bat to update!
 echo.
 goto input
 
