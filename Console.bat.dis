@@ -37,7 +37,7 @@ for /f "tokens=*" %%a in (Console.cfg) do (
 	set variable=
 )
 
-FOR /F "tokens=*" %%g IN ('echo Powershell.exe -executionpolicy bypass -File %path_code%helper\releaseversion.ps1') do (set rcmd=%%g)
+FOR /F "tokens=*" %%g IN ('echo Powershell.exe -executionpolicy bypass -File %path_code%\helper\releaseversion.ps1') do (set rcmd=%%g)
 FOR /F "tokens=*" %%e IN ('%rcmd%') do (set latest_version=%%e)
 
 echo - Succesful
