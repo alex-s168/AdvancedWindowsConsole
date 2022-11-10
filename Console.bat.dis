@@ -1,6 +1,11 @@
 @echo off
 setlocal enabledelayedexpansion
 
+set "fst=abcd"
+set "srt=abc"
+call set str=%%fst:%srt%=%%
+call set str=%%fst:%srt%=%%
+
 cls
 title AdvancedWindowsConsole
 echo Starting...
@@ -116,22 +121,11 @@ if "%cmd%"=="ps" (goto ps)
 if "%cmd%"=="powershell" (goto ps)
 if "%cmd%"=="shell" (goto shell)
 if "%cmd%"=="s" (goto shell)
-if "%cmd%"=="vim" (goto vim)
-if "%cmd%"=="vi" (goto vim)
-if "%cmd%"=="edit" (goto vim)
-if "%cmd%"=="calc" (goto calc)
-if "%cmd%"=="calculator" (goto calc)
-if "%cmd%"=="edit conf" (goto editconf)
-if "%cmd%"=="edit config" (goto editconf)
-if "%cmd%"=="edit cfg" (goto editconf)
-if "%cmd%"=="cfgedit" (goto editconf)
-if "%cmd%"=="cfgset" (goto editconf)
 if "%cmd%"=="sys" (goto sysinf)
 if "%cmd%"=="sysinf" (goto sysinf)
 if "%cmd%"=="system" (goto sysinf)
 if "%cmd%"=="systeminf" (goto sysinf)
 if "%cmd%"=="apps" (goto apps)
-if "%cmd%"=="menu" (goto menu)
 if "%cmd%"=="test" (goto test)
 if "%cmd%"=="info" (goto info)
 if "%cmd%"=="update" (goto update)
@@ -184,17 +178,7 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 	if "%%a"=="rem" (goto rem)
 	if "%%a"=="remove" (goto rem)
 	if "%%a"=="mkdir" (echo Verzeichniss erfolgreich erstellt!)
-	if "%%a"=="nm" (goto nmap)
-	if "%%a"=="nmap" (goto nmap)
-	if "%%a"=="serverscan" (goto nmap)
-	if "%%a"=="sscan" (goto nmap)
-	if "%%a"=="crunch" (goto crunch)
-	if "%%a"=="cpwl" (goto crunch)
-	if "%%a"=="pwl" (goto crunch)
-	if "%%a"=="cpwlist" (goto crunch)
-	if "%%a"=="pwlist" (goto crunch)
-	if "%%a"=="createpasswordlist" (goto crunch)
-	if "%%a"=="passwordlist" (goto crunch)
+	
 	if "%%a"=="config" (goto config)
 	if "%%a"=="cfg" (goto config)
 	if "%%a"=="cnfg" (goto config)
@@ -207,16 +191,6 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 	if "%%a"=="tl" (goto TaskList)
 	if "%%a"=="tasklist" (goto TaskList)
 	if "%%a"=="processlist" (goto TaskList)
-	if "%%a"=="nim" (goto vim)
-	if "%%a"=="vim" (goto vim)
-	if "%%a"=="vi" (goto vim)
-	if "%%a"=="edit" (goto vim)
-	if "%%a"=="hd" (goto hexdump)
-	if "%%a"=="hex" (goto hexdump)
-	if "%%a"=="hexd" (goto hexdump)
-	if "%%a"=="hexdump" (goto hexdump)
-	if "%%a"=="base64" (goto base64)
-	if "%%a"=="base" (goto base64)
 	if "%%a"=="vbs" (goto cscript)
 	if "%%a"=="sudo" (goto sudo)
 	if "%%a"=="7z" (goto sevenzip)
@@ -226,29 +200,8 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 	if "%%a"=="sysinf" (goto sysinf)
 	if "%%a"=="system" (goto sysinf)
 	if "%%a"=="systeminf" (goto sysinf)
-	if "%%a"=="web" (goto web)
-	if "%%a"=="links" (goto web)
 	if "%%a"=="pck" (goto pck)
 	if "%%a"=="package" (goto pck)
-
-	if "%%a"=="help" (
-		if "%%b"=="hd" (
-			set hgr=hexdump
-			goto helpspec
-		)
-		if "%%b"=="hex" (
-			set hgr=hexdump
-			goto helpspec
-		)
-		if "%%b"=="hexdump" (
-			set hgr=hexdump
-			goto helpspec
-		)
-		if "%%b"=="base64" (
-			set hgr=base64
-			goto helpspec
-		)
-	)
 	set /a c=0
 	for /f "tokens=*" %%j in (%path_code%\APPS.cfg) do (
 		set variable=%%j
@@ -291,28 +244,6 @@ for /F "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13 delims= " %%a in ("%cmd%") do (
 
 )
 goto runcontinue
-
-:menu
-set cmd=
-echo.
-echo ╔═════════════════════════════════════╗
-echo ║       Simple Menu for Tools         ║
-echo ╠═════════════════════════════════════╣
-echo ║[v] = vim                            ║
-echo ║[c] = calc             [w] = web     ║
-echo ║            [e] = exit               ║
-echo ╚═════════════════════════════════════╝
-
-SET /P M=
-IF "%M%"=="v" GOTO vim
-IF "%M%"=="c" GOTO calc
-IF "%M%"=="d" GOTO discord
-IF "%M%"=="w" GOTO web
-
-echo.
-goto input
-
-
 
 :shell
 start %path_code%\Console.bat
@@ -380,45 +311,10 @@ if NOT /f %arg1%=="" (
 echo.
 goto input
 
-:helpspec
-set cmd=
-IF "%hgr%"=="hexdump" (%path_code%\Tools\hexdump\hexdump.exe -h)
-IF "%hgr%"=="base64" (echo Base64)
-echo.
-goto input
-
-:web
-set cmd=
-echo.
-start %path_code%\Tools\links\links.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
-echo.
-goto input
-
-:nmap
-set cmd=
-echo.
-start /b %path_code%\Tools\nmap\nmap.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
-echo.
-goto input
-
-:editconf
-set cmd=
-echo.
-start %path_code%\Tools\vim\vim.exe %path_code%\Console.cfg
-echo.
-goto input
-
 :sysinf
 set cmd=
 echo.
 systeminfo %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
-echo.
-goto input
-
-:calc
-set cmd=
-echo.
-start %path_code%\Tools\calc\bdcalc.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
@@ -436,47 +332,9 @@ cscript %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
 echo.
 goto input
 
-:hexdump
-set cmd=
-echo.
-cls
-start /b %path_code%\Tools\hexdump\hexdump.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
-pause >nul
-echo.
-goto input
-
-:base64
-set cmd=
-echo.
-echo | set /p=%arg1%| %path_code%\Tools\base64\base64.exe %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
-echo.
-goto input
-
-
 :sudo
 set cmd=
 %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
-goto input
-
-:vim
-set cmd=
-echo.
-start %path_code%\Tools\vim\vim.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
-echo.
-goto input
-
-:whatsapp
-set cmd=
-echo.
-start %path_code%\Tools\whatscli\whatscli.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
-echo.
-goto input
-
-:crunch
-set cmd=
-echo.
-start /b %path_code%\Tools\crunch\crunch.exe %arg1% %arg2% %arg3% %arg4% %arg5% %arg6% %arg7% %arg8% %arg9% %arg10%
-echo.
 goto input
 
 :rem
@@ -525,19 +383,14 @@ goto input
 set cmd=
 help
 echo.
-echo clear       Leert die Konsole.
-echo ifconfig    Zeigt Informationen ueber die Internetverbindung an.
-echo ls          Zeigt Ordner und Unterordner an.
-echo kill/close  Eliminiert dieses Konsolenfenster.
-echo rs/restart  Startet das Konsolenfenster neu.
-echo.
-echo edit        Öffnet einen Datei-Editor (vim)
-echo hex         HEX-Informationen einer datei auslesen
-echo crunch      Passwort Brute-Force Listen Generieren
-echo nmap        Schwachstellen Analyzieren
-echo base64      Base 64
-echo calc        Calculator
-echo web         WebEditor
+echo clear          Leert die Konsole.
+echo ifconfig       Zeigt Informationen ueber die Internetverbindung an.
+echo ls             Zeigt Ordner und Unterordner an.
+echo kill/close     Eliminiert dieses Konsolenfenster.
+echo rs/restart     Startet das Konsolenfenster neu.
+echo sys            System Informationen
+echo pck            Package System
+echo apps           App System (outdated)
 echo.
 goto input
 
@@ -584,12 +437,16 @@ IF "%arg1%"=="" (
 )
 IF "%arg1%"=="list" (
 	for /d %%D in (%path_code%\packages\*) do (
+		set "fst=%%D"
+		set "srt=%path_code%\packages\"
+		set str=
+		call set str=%%fst:%srt%=%%
 		set /a c=0
 		for /f "tokens=*" %%a in (%%~fD\info.md) do (
 			set variable=%%a
 			set /a c=c+1
 
-			IF "!c!"=="1" (echo %%D   -   !variable!)
+			IF "!c!"=="1" (echo %str%   -   !variable!)
 
 			set variable=
 		)
