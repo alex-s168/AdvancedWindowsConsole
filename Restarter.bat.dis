@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 taskkill /im Console.bat /f
 tskill Console.bat
 
@@ -7,10 +8,13 @@ for /f "tokens=*" %%a in (Console.cfg) do (
 	set variable=%%a
 	set /a c=c+1
 	IF NOT "!variable:~0,1!"=="#" (
-		IF "!c!"=="10" (set path_console_bat=!variable!)
+		IF "!c!"=="10" (
+			set %codefolderpath=!variable!
+		)
 	)
 	set variable=
 )
 
-start %path_console_bat%
+start %codefolderpath%\Console.bat
+
 exit
