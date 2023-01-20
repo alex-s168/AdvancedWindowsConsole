@@ -10,7 +10,7 @@ cls
 title AdvancedWindowsConsole
 echo Starting...
 chcp 65001
-set version=v1.1.7
+set version=v1.1.8
 
 del /f Setup.bat
 
